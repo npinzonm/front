@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { CotizadorComponent } from './cotizador/cotizador.component';
 import { PopupComponent } from './popup/popup.component';
+import { InspeccionComponent } from './inspeccion/inspeccion.component';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { PopupComponent } from './popup/popup.component';
     HeaderComponent,
     CotizadorComponent,
     PopupComponent,
+    InspeccionComponent
     // Otros componentes
   ],
   imports: [

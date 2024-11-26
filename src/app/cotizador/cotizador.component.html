@@ -5,47 +5,32 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="mb-4">
           <label for="nombre" class="block text-sm font-medium">Nombre</label>
-          <input type="text" id="nombre" name="nombre" required [(ngModel)]="nombreCliente"
+          <input type="text" id="nombre" name="nombreCliente" required [(ngModel)]="nombreCliente"
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
         </div>
 
         <div class="mb-4">
           <label for="apellido" class="block text-sm font-medium">Apellido</label>
-          <input type="text" id="apellido" name="apellido" required
+          <input type="text" id="apellido" name="apellidoCliente" [(ngModel)]="apellidoCliente" required
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
         </div>
 
         <div class="mb-4">
           <label for="correo" class="block text-sm font-medium">Correo Electrónico</label>
-          <input type="email" id="correo" name="correo" required
+          <input type="email" id="correo" name="correoCliente" [(ngModel)]="correoCliente"  required
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
         </div>
 
         <div class="mb-4">
           <label for="celular" class="block text-sm font-medium">Número de Celular</label>
-          <input type="tel" id="celular" name="celular" required
+          <input type="tel" id="celular" name="celularCliente"  [(ngModel)]="celularCliente" required
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
         </div>
 
-        <div class="mb-4">
-          <label for="tipoIdentificacion" class="block text-sm font-medium">Tipo de Identificación</label>
-          <select id="tipoIdentificacion" name="tipoIdentificacion" required
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-            <option value="">Selecciona una opción</option>
-            <option value="CC">Cédula de Ciudadanía</option>
-            <option value="CE">Cédula de Extranjería</option>
-          </select>
-        </div>
-
-        <div class="mb-4">
-          <label for="numeroIdentificacion" class="block text-sm font-medium">Número de Identificación</label>
-          <input type="text" id="numeroIdentificacion" name="numeroIdentificacion" required
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
-        </div>
 
         <div class="mb-4">
           <label for="tipoVehiculo" class="block text-sm font-medium">Tipo de Vehículo</label>
-          <select id="tipoVehiculo" name="tipoVehiculo" required
+          <select id="tipoVehiculo" name="tipoVehiculo" [(ngModel)]="tipoVehiculo" required
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             (change)="onTipoVehiculoChange($event)">
             <option value="">Selecciona una opción</option>
@@ -58,26 +43,25 @@
 
         <!-- Campo de Placa -->
         <div class="mb-4 col-span-1 placaB">
-
+          <label for="tipoVehiculo" class="block text-sm font-medium placaL">¿Tiene Placa?</label>
           <label class="inline-flex items-center cursor-pointer">
-            <input type="checkbox" value="" class="sr-only peer" (change)="togglePlaca()"/>
+            <input type="checkbox" class="sr-only peer" (change)="changePlaca()" [checked]="tienePlaca"/>
             <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-            <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Tiene Placa</span>
           </label>
           
         </div>
         <div class="mb-4 col-span-1" [ngClass]="{'hidden': !tienePlaca}">
-          <label for="placa" class="block text-sm font-medium">Número de Placa</label>
-          <input type="text" id="placa" name="placa" required
+          <label for="placaVehiculo" class="block text-sm font-medium">Número de Placa</label>
+          <input type="text" id="placaVehiculo" name="placaVehiculo" [(ngModel)]="placaVehiculo" required
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
         </div>
 
         <!-- El campo de Marca se llenará con datos de la API -->
         <div class="mb-4">
           <label for="marca" class="block text-sm font-medium">Marca</label>
-          <select id="marca" name="marca" required
+          <select id="marca" name="marcaVehiculo" required
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" 
-            (change)="onMarcaChange($event)">
+            (change)="onMarcaChange($event)" [(ngModel)]="marcaVehiculo">
             <option value="">Selecciona una marca</option>
             <option *ngFor="let marca of filteredMarcas" [value]="marca">
               {{ marca }} <!-- Muestra el nombre de la marca -->
@@ -88,12 +72,12 @@
         <!-- Campo de Modelo y Año -->
         <div class="mb-4">
           <label for="modelo" class="block text-sm font-medium">Modelo</label>
-          <select id="modelo" name="modelo" required
+          <select id="modelo" name="modeloVehiculo" [(ngModel)]="modeloVehiculo" required
           (change)="onReferenciaChange($event)"
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
             <option value="">Selecciona un modelo</option>
-            <option *ngFor="let referencia of referencias" [value]="referencia.Referencia1"> <!-- Cambiado a referencia.Referencia1 -->
-              {{ referencia.Referencia1 }} <!-- Cambiado a referencia.Referencia1 -->
+            <option *ngFor="let referencia of referencias" [value]="referencia"> <!-- Cambiado a referencia.Referencia1 -->
+              {{ referencia }} <!-- Cambiado a referencia.Referencia1 -->
             </option>
           </select>
         </div>
@@ -101,7 +85,7 @@
         
         <div class="mb-4">
           <label for="ano" class="block text-sm font-medium">Año</label>
-          <select id="ano" name="ano" required
+          <select id="ano" name="anioVehiculo" [(ngModel)]="anioVehiculo" required
           (change)="onAnoChange($event)"
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
             <option value="">Selecciona un año</option>
@@ -114,7 +98,7 @@
 
         <div class="mb-4">
           <label for="tipoCobertura" class="block text-sm font-medium">Tipo de Cobertura</label>
-          <select id="tipoCobertura" name="tipoCobertura" required
+          <select id="tipoCobertura" name="tipoCobertura" [(ngModel)]="tipoCobertura" required
           (change)="onTipoCoberturaChange($event)"
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
             <option value="">Selecciona una cobertura</option>
@@ -149,19 +133,35 @@
   </div>
 
   <div class="mb-4 hidden">
-    <label for="valorFinal" class="block text-sm font-medium">valorFinal</label>
-    <input type="number" id="valorFinal" name="valorFinal" [(ngModel)]="valorSeguro" 
+    <label for="valorSeguro" class="block text-sm font-medium">valorFinal</label>
+    <input type="number" id="valorSeguro" name="valorSeguro" [(ngModel)]="valorSeguro" 
       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
   </div>
 
-  <app-popup
-    *ngIf="showPopup"
-    [nombreCliente]="nombreCliente"
-    [valorSeguro]="valorSeguro"
-    (close)="closePopup()"
-    (buy)="onBuy()">
-  </app-popup>
+  <div class="mb-4 hidden">
+    <label for="numeroPoliza" class="block text-sm font-medium">poliza</label>
+    <input type="number" id="numeroPoliza" name="numeroPoliza" [(ngModel)]="numeroPoliza" 
+      class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
+  </div>
 
+    <app-popup
+      *ngIf="showPopup"
+      [nombreCliente]="nombreCliente"
+      [apellidoCliente]="apellidoCliente"
+      [correoCliente]="correoCliente"
+      [celularCliente]="celularCliente"
+      [tipoVehiculo]="tipoVehiculo"
+      [marcaVehiculo]="marcaVehiculo"
+      [modeloVehiculo]="modeloVehiculo"
+      [anioVehiculo]="anioVehiculo"
+      [tipoCoberturaVehiculo]="tipoCobertura"
+      [valorSeguro]="valorSeguro"
+      [isCotizacion]="isCotizacion"
+      [numeroPoliza]="numeroPoliza"
+      [placaVehiculo]="placaVehiculo"
+      (close)="closePopup()"
+      (buy)="onBuy()">
+    </app-popup>
     </form>
 
     <!-- Resultado de la cotización -->

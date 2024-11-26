@@ -47,6 +47,7 @@
               "optimization": true,
               "sourceMap": false,
               "extractLicenses": true,
+              "aot": true, 
 
               "budgets": [
                 {
@@ -65,7 +66,8 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "aot": true
             }
           },
           "defaultConfiguration": "production"

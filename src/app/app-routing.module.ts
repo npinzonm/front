@@ -1,16 +1,14 @@
 import {Routes} from '@angular/router';
 import {CotizadorComponent} from './cotizador/cotizador.component';
+import { InspeccionComponent } from './inspeccion/inspeccion.component';
+
+import { PdfPolizaComponent } from './pdf-poliza/pdf-poliza.component';
+import { pagoComponent } from './pago/pago.component';
 
 export const routes: Routes = [
-  {
-    path: '',
-    redirectTo: '/cotizar', // Redirige a la ruta de cotizar
-    pathMatch: 'full' // Asegúrate de que coincida exactamente
-  },
-  {
-    path: 'cotizar',
-    title: 'Cotizador',
-    component: CotizadorComponent,
-  },
-  // Puedes agregar más rutas aquí
+  { path: 'cotizar', component: CotizadorComponent },
+  { path: 'inspeccion', component: InspeccionComponent },
+  { path: 'checkout', component: pagoComponent },
+  { path: 'pagocompletado', component: PdfPolizaComponent },
+  
 ];
